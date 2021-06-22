@@ -1,0 +1,17 @@
+Curso de Deep Learning com TensorFlow
+por Rafael Vieira Coelho
+
+-------------------------aula 01-------------------------
+Deep Learning ou (Aprendizagem Profunda), é uma sub-ária da mache Learning , que emprega algoritmos para processar dados e imitar o processamento feito pelo cérebro humano.
+Ele usa camadas de neurônios matemáticos para processar dados,
+compreender a fala humana e reconhecer objetos visualmente.
+
+----------------------------------------------------------
+O que é TensorFlow?
+
+biblioteca implementada pelo Google
+Utiliza Python para criar um front-end para a implementação em c++
+É Utilizada para processamento de linguagem, redes neurais recorrentes,
+classificação digital de escrita e reconhecimento de imagens.
+Roda em IOS, Android, GPUs, CPUs, máquinas locais de dispositivos de cluster em nuvem.
+------------------------------------------------------------
