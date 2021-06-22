@@ -19,3 +19,7 @@ Biblioteca Numpy
 
 NumPy é uma biblioteca Python usada largamente para operações com
 listas/arrays. Você pode pensar em um array NumPy como um tipo especial de lista com uma série de funções adicionais.
+Para criar um array NumPy você deve especificar o tamanho e um método de inicialização. Veja um exemplo:
+import numpy as np;
+nparray = np.zeros((5,5));
+-------------------------------------------------------------
