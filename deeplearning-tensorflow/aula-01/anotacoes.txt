@@ -15,3 +15,7 @@ Utiliza Python para criar um front-end para a implementação em c++
 classificação digital de escrita e reconhecimento de imagens.
 Roda em IOS, Android, GPUs, CPUs, máquinas locais de dispositivos de cluster em nuvem.
 ------------------------------------------------------------
+Biblioteca Numpy
+
+NumPy é uma biblioteca Python usada largamente para operações com
+listas/arrays. Você pode pensar em um array NumPy como um tipo especial de lista com uma série de funções adicionais.
