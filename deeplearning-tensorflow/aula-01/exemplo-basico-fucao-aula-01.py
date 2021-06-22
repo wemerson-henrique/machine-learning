@@ -37,9 +37,9 @@ def main():
     optimizer é definição da função (ou jeito) utilizado para fazer com que a rede aprenda e modifique os pesos dentro dela.
     loss é a função de erro utilisada, como é calculado o erro.
     '''
-    x = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float);#comenario abaixo
-    y = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float);
-    model.fit(x,y, epochs=500);
-    print(model.predict([1.0]));
+    x = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float); #vetor entradass
+    y = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype = float); #vetor saidas
+    model.fit( x, y, epochs = 500); #era mostra e os ciclos,eras de aprendisado
+    print(model.predict([1.0])); #exemplo de teste pratico
 if __name__ == '__main__':
     main();
