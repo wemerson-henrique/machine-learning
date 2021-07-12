@@ -7,7 +7,7 @@ como ficaria nossa imagem da ponte nos outros espaços de cores.
 '''
 
 '''import cv2
-img = cv2.imread('sigatoka.jpg')
+img = cv2.imread('img/entrada/sigatoka.jpg')
 24
 cv2.imshow("Original", img)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -21,7 +21,7 @@ cv2.waitKey(0)'''
 #-----------------------------------------------------Canais da imagem colorida---------------------------------------------------------------------
 
 import cv2
-img = cv2.imread('sigatoka.jpg')
+img = cv2.imread('img/entrada/sigatoka.jpg')
 (canalAzul, canalVerde, canalVermelho) = cv2.split(img)
 cv2.imshow("Vermelho", canalVermelho)
 cv2.imshow("Verde", canalVerde)

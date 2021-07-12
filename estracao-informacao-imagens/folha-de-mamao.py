@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-img = cv2.imread('folha-de-mamao.jpg')
+img = cv2.imread('img/entrada/folha-de-mamao.jpg')
 largura = img.shape[1]
 altura = img.shape[0]
 proporcao = float(altura/largura)
