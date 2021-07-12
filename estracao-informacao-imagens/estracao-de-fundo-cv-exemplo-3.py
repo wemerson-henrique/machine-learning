@@ -1,5 +1,8 @@
+# == https://stackoverflow.com/questions/29313667/how-do-i-remove-the-background-from-this-kind-of-image
+
 import cv2
 import numpy as np
+from matplotlib import pyplot as plt
 
 #== Parameters =======================================================================
 BLUR = 21
@@ -13,7 +16,7 @@ MASK_COLOR = (0.0,0.0,1.0) # In BGR format
 #== Processing =======================================================================
 
 #-- Read image -----------------------------------------------------------------------
-img = cv2.imread('C:/img/entrada/girl.jpg')
+img = cv2.imread('img/entrada/girl.jpg')
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 #-- Edge detection -------------------------------------------------------------------
@@ -23,10 +26,7 @@ edges = cv2.erode(edges, None)
 
 #-- Find contours in edges, sort by area ---------------------------------------------
 contour_info = []
-_, contours, _ = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
-# Previously, for a previous version of cv2, this line was:
-#  contours, _ = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
-# Thanks to notes from commenters, I've updated the code but left this note
+_, contours, hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 for c in contours:
     contour_info.append((
         c,
@@ -41,10 +41,13 @@ max_contour = contour_info[0]
 mask = np.zeros(edges.shape)
 cv2.fillConvexPoly(mask, max_contour[0], (255))
 
+
+
 #-- Smooth mask, then blur it --------------------------------------------------------
 mask = cv2.dilate(mask, None, iterations=MASK_DILATE_ITER)
 mask = cv2.erode(mask, None, iterations=MASK_ERODE_ITER)
 mask = cv2.GaussianBlur(mask, (BLUR, BLUR), 0)
+
 mask_stack = np.dstack([mask]*3)    # Create 3-channel alpha mask
 
 #-- Blend masked img into MASK_COLOR background --------------------------------------
@@ -54,7 +57,24 @@ img         = img.astype('float32') / 255.0                 #  for easy blending
 masked = (mask_stack * img) + ((1-mask_stack) * MASK_COLOR) # Blend
 masked = (masked * 255).astype('uint8')                     # Convert back to 8-bit
 
-cv2.imshow('img', masked)                                   # Display
-cv2.waitKey()
+plt.imsave('img/girl_blue.png', masked)
+# split image into channels
+c_red, c_green, c_blue = cv2.split(img)
 
-#cv2.imwrite('C:/Temp/person-masked.jpg', masked)           # Save
+# merge with mask got on one of a previous steps
+img_a = cv2.merge((c_red, c_green, c_blue, mask.astype('float32') / 255.0))
+
+# show on screen (optional in jupiter)
+#%matplotlib inline
+plt.imshow(img_a)
+plt.show()
+
+# save to disk
+#cv2.imwrite('img/girl_1.png', img_a*255)
+
+# or the same using plt
+#plt.imsave('img/girl_2.png', img_a)
+
+cv2.imshow('img', masked)                                   # Displays red, saves blue
+
+cv2.waitKey()
