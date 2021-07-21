@@ -83,7 +83,7 @@ cv2.waitKey(0)'''
 cada pixel pode estar “ligado” ou “desligado”, ou seja, a máscara possui pixels pretos e
 brancos apenas. '''
 
-'''import cv2
+import cv2
 import np
 img = cv2.imread('sigatoka.jpg')
 cv2.imshow("Original", img)
@@ -92,7 +92,7 @@ mascara = np.zeros(img.shape[:2], dtype = "uint8")
 cv2.circle(mascara, (cX, cY), 100, 255, -1)
 img_com_mascara = cv2.bitwise_and(img, img, mask = mascara)
 cv2.imshow("Máscara aplicada à imagem", img_com_mascara)
-cv2.waitKey(0)'''
+cv2.waitKey(0)
 
 #-----------------------------------------------------Máscaras---------------------------------------------------------------------
 
