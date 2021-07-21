@@ -64,7 +64,7 @@ cv2.imshow("imagem alterada", img2)
 
 mascara = np.zeros(img_redimensionada.shape[:2], dtype = "uint8")
 (cX, cY) = (img_redimensionada.shape[1] // 2, img_redimensionada.shape[0] // 2)
-#cv2.circle(mascara, (cX, cY), 100, 255, -1)
+cv2.circle(mascara, (cX, cY), 100, 255, -1)
 img_com_mascara = cv2.bitwise_and(img_redimensionada, img_redimensionada, mask = mascara)
 cv2.imshow("Máscara aplicada à imagem", img_com_mascara)
 
