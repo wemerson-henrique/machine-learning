@@ -1,6 +1,8 @@
 import numpy as np
 import cv2
-img = cv2.imread('sigatoka.jpg')
+img = cv2.imread('img/entrada/sigatoka.jpg')
+cv2.imshow("Imagem goriginal", img)
+#img = cv2.imread('img/entrada/sigatoka1.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 suave = cv2.GaussianBlur(img, (7, 7), 0)
 canny1 = cv2.Canny(suave, 20, 120)
