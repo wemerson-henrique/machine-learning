@@ -59,5 +59,37 @@ ret, components = cv2.connectedComponents(pixel_labels, connectivity=8)
 plt.imshow(components, cmap='gray')
 
 #---------
+indices = []
+for i in range(1, ret):
+    row, col = np.where(components==i)
+    indices.append(max(len(row), len(col)))
+component = np.argmax(np.array(indices))
+main_component = component+1   #indexing starts from 0, so we increment by 1 to get actual component index
+# creating a mask and extracting pixels corresponding to cluster to which leaf belongs.
+# 1 for actual leaf pixels and 0 for other pixels
+mask = np.where(components==main_component, 1, 0)
+B = image[:, :, 0]
+G = image[:, :, 1]
+R = image[:, :, 2]
+# Extract only masked pixels
+r = R*mask
+g = G*mask
+b = B*mask
+final_img = np.dstack((r, g, b))
+plt.imshow(final_img)
+
+#---------
+v_sum = np.sum(mask, axis=0)
+h_sum = np.sum(mask, axis=1)
+w = np.count_nonzero(v_sum)
+h = np.count_nonzero(h_sum)
+x_indices = np.where(v_sum != 0)
+y_indices = np.where(h_sum != 0)
+x = x_indices[0][0]
+y = y_indices[0][0]
+final_crop_img = final_img[y:y+h-1, x:x+w-1, :]
+final_crop_img = np.uint8(final_crop_img)
+img = cv2.resize(final_crop_img, (640,480), interpolation=cv2.INTER_AREA)
+plt.imshow(img)
 
 plt.show()
