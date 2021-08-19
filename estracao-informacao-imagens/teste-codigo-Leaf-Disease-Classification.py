@@ -16,18 +16,26 @@ for folder in folders: #cria uma laço de repitição para percorre a lista de n
     cnt = len(os.listdir(dataset+folder+os.sep)) #comentarios a baixo
     #a função "len()" é utilisada para fazer a contagem em items de objeto, podem ser vetor or string
     #a função "os.listdir()" retorna uma lista de nomes de uma pasta
-    img_count[folder] = cnt
-# Plotting barplots of no.of leaf images w.r.t each disease
+    # entenda que: dataset= é a pasta home com as imagens; folder= são os subpastas; os.sep= é um tratamento de caminho para universalizar enpende do sintema operacional "os"
+    # basicamente o comando "len(os.listdir(dataset + folder + os.sep))" ira contar todos os intens das subpast da pasta home de imagens, retornar o valor para a variavel "cnt"
+    img_count[folder] = cnt #atrui ao vetor "img_count" o nome das subpastas e a quantidades de items que ela possui
+    #print(img_count)
+#----------------------
+# mostrarndo os dados no grafico, respetivo a cada doença
+#OBS: estudar mais sobre
 plt.bar(img_count.keys(), img_count.values())
 plt.xticks(rotation='vertical')
+#----------------------
 
 
 #------------------------- fazer a leitura de uma imagem e dividila nos tres cainais de cor "LAB"
-image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
+image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg') #faz a leitura de uma imagem
 
-img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB) #faz a converção da imagem do padão de cor BGR para LAB
+#OBS: o numpy trabalha com o canal RGB invertido de modo que fica BGR
 
-L = img_lab[:, :, 0]
+#as proximas trez linhas ira dividir o canal de cor LAB da imagem
+L = img_lab[:, :, 0] #a variavel "L" ira receber o canal de cor 0 da imagem, ou seja a fatia de corror L do padrão LAB de cores
 a = img_lab[:, :, 1]
 b = img_lab[:, :, 2]
 fig, ax = plt.subplots(1,3, figsize=(15,15))
