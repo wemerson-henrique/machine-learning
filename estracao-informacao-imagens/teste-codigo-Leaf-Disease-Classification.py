@@ -1,19 +1,21 @@
-# Importing necessary packages
+
 import os
 import cv2
 import numpy as np
-import pandas as pd
-
 import matplotlib.pyplot as plt
+
 #-----Vai fazer a leitura das pastas e as rinderizar em um grafico
-# Reading folders where each folder corresponds to each disease
-dataset = 'img/' #endereço da pasta principal contendo as passas segundarias
-folders = os.listdir(dataset)
-folders.sort()
+
+
+dataset = 'img/' #endereço da pasta principal contendo as passas segundarias, a variavel "dataset" armazena o caminho da base de dados
+folders = os.listdir(dataset) #o comando "os.listdir()" ira retornar uma lista de todos os nomes dos conteudos contido na pasta endicada, nestecaso o "dataset" que é iqual a "img/", destaca também que esta lista não segue uma organização previa
+folders.sort() #como a função anterior não organiza, fui usado a função ".sort()" para ordenar os elementos da liste em ordem cressente
 # Count no.of images w.r.t each disease
 img_count = {}
-for folder in folders:
-    cnt = len(os.listdir(dataset+folder+os.sep))
+for folder in folders: #cria uma laço de repitição para percorre a lista de nomes da pasta
+    cnt = len(os.listdir(dataset+folder+os.sep)) #comentarios a baixo
+    #a função "len()" é utilisada para fazer a contagem em items de objeto, podem ser vetor or string
+    #a função "os.listdir()" retorna uma lista de nomes de uma pasta
     img_count[folder] = cnt
 # Plotting barplots of no.of leaf images w.r.t each disease
 plt.bar(img_count.keys(), img_count.values())
