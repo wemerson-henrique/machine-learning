@@ -1,6 +1,7 @@
 
 import os
 import cv2
+import cv2.cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -29,26 +30,34 @@ plt.xticks(rotation='vertical')
 
 
 #------------------------- fazer a leitura de uma imagem e dividila nos tres cainais de cor "LAB"
-image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg') #faz a leitura de uma imagem
+image = cv2.imread('img/entrada/plantacao-de-bananeira-png-3.jpg') #faz a leitura de uma imagem
 
 img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB) #faz a converção da imagem do padão de cor BGR para LAB
 #OBS: o numpy trabalha com o canal RGB invertido de modo que fica BGR
 
 #as proximas trez linhas ira dividir o canal de cor LAB da imagem
 L = img_lab[:, :, 0] #a variavel "L" ira receber o canal de cor 0 da imagem, ou seja a fatia de corror L do padrão LAB de cores
-a = img_lab[:, :, 1]
-b = img_lab[:, :, 2]
-fig, ax = plt.subplots(1,3, figsize=(15,15))
-ax[0].imshow(L)
-ax[1].imshow(a)
-ax[2].imshow(b)
+a = img_lab[:, :, 1] #a variavel "a" ira receber o canal de cor 1 da imagem, ou seja a fatia de corror a do padrão LAB de cores
+b = img_lab[:, :, 2] #a variavel "b" ira receber o canal de cor 2 da imagem, ou seja a fatia de corror v do padrão LAB de cores
+fig, ax = plt.subplots(1,3, figsize=(15,15)) #vai criar uma figura e um conjunto de subtramas.
+# "figsize=(15,15)" => tamanho da figura
+# "1,3," => "1" padrão da função, "3" indica o numero de imagens a figura possuira
+# "ax" => retorna uma matrix de eixo de  x e y a imagem, que nesse caso so pussuira o eixo x
+# "fig" => é a figura criaga
+ax[0].imshow(L) # vai adcionar a vaivel L ao eixo no locau "0" da figura
+ax[1].imshow(a) # vai adcionar a vaivel a ao eixo no locau "1" da figura
+ax[2].imshow(b) # vai adcionar a vaivel b ao eixo no locau "2" da figura
 
 #-------------- vai fazer a retizada do fundo
 
 # K-means clustering in opencv - https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_ml/py_kmeans/py_kmeans_opencv/py_kmeans_opencv.html
-pixel_vals = b.flatten()
-pixel_vals = np.float32(pixel_vals)
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+pixel_vals = b.flatten() #esplicação abaixo
+# O comando "b.flatten()" Retorne uma cópia da matriz recolhida em uma dimensão,
+# basicamente vai pegar uma matriz e nivela-la para que as matrizes no seu enterior fiquem uma mesma matriz ou nivel,
+# Exemplo: [[1,1,1],[2,2,2],[3,3,3]] => [1,1,1,2,2,2,3,3,3]
+pixel_vals = np.float32(pixel_vals) #converte os valores da matriz "pixel_vals" para o tipo float
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0) #vai aplicar a função KMeans, explicação abaixo
+
 # Since we are interested in only actual leaf pixels, we choose 2 clusters
 # one cluster for actual leaf pixels and other for unwanted background pixels.
 K = 2
