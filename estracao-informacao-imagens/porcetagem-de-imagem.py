@@ -30,7 +30,7 @@ altura, largura, canal = imagem.shape
 tamanho = altura * largura
 print("Numero de pix vermelhos: ", ver)
 print("Numero de pix brancos: ", cont)
-pv = (tamanho - cont) * 100 / tamanho
+pv = (cont / tamanho)
 print("A pocentagem ocupada da imagem é: ", pv)
 
 cv2.imshow("Imagem modificada", imagem) #abre uma tela coma a imagem
