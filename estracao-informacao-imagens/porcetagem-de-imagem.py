@@ -11,7 +11,7 @@ print(info2)'''
 
 
 
-imagem = cv2.imread('img/entrada/porcetagem2.png') #seleciona a imagem
+imagem = cv2.imread('img/entrada/porcetagem3.png') #seleciona a imagem
 
 cont = 0
 ver = 0
@@ -28,7 +28,7 @@ for y in range(0, imagem.shape[0]):
 
 altura, largura, canal = imagem.shape
 tamanho = altura * largura
-print("Numero de pix vermelhos: ", ver)
+print("Numero de pix azuis: ", ver)
 print("Numero de pix brancos: ", cont)
 pv = (cont / tamanho) * 100
 print("A pocentagem ocupada da imagem é: ", pv)
