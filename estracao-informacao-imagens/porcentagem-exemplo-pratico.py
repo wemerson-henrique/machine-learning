@@ -71,7 +71,8 @@ cv2.grabCut(img1,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
 mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 img1 = img2*mask2[:,:,np.newaxis]
 
-
+exemplo = img1
+cv2.imshow('Imagem Orig',exemplo)
 #cv2.imshow("imagem alterada", img2)
 #----------------------------------------------------
 
