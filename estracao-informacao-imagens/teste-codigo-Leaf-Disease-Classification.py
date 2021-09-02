@@ -56,13 +56,28 @@ pixel_vals = b.flatten() #esplicação abaixo
 # basicamente vai pegar uma matriz e nivela-la para que as matrizes no seu enterior fiquem uma mesma matriz ou nivel,
 # Exemplo: [[1,1,1],[2,2,2],[3,3,3]] => [1,1,1,2,2,2,3,3,3]
 pixel_vals = np.float32(pixel_vals) #converte os valores da matriz "pixel_vals" para o tipo float
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0) #vai aplicar a função KMeans, explicação abaixo
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0) #vai aplicar a configuração inicial para função KMeans, explicação abaixo
+# "(cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)" bazicamente esta definindo um criterio de interação e precisão
+#critério é tal que, sempre que 10 iterações do algoritmo são executadas,
+# ou uma precisão de épsilon = 1,0 é alcançada, pare o algoritmo e retorne a resposta.
 
-# Since we are interested in only actual leaf pixels, we choose 2 clusters
-# one cluster for actual leaf pixels and other for unwanted background pixels.
-K = 2
-retval, labels, centers = cv2.kmeans(pixel_vals, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
-centers = np.uint8(centers)
+# Uma vez que estamos interessados apenas em pixels de folhas reais, escolhemos 2 clusters
+# um cluster para pixels de folha reais e outro para pixels de fundo indesejados.
+K = 2 #criação de clusters
+retval, labels, centers = cv2.kmeans(pixel_vals, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS) #explicação a baixo, retirados do opencv documente
+#A função "cv2.kmeans()" implementa um algoritmo k-means que encontra os centros dos clusters cluster_count e agrupa as amostras de entrada em torno dos clusters.
+# Como saída,bestLabelseu contém um índice de cluster baseado em 0 para a amostra armazenada no eut h linha da matriz de amostras.
+# "pixel_vals" é a matriz de intrada, os dados para serem clusterisados
+# "K" é o numero de clusters os quais seram divididos
+# "None" Matriz de inteiros de entrada / saída que armazena os índices de cluster para cada amostra.
+# "criteria" Os critérios de terminação do algoritmo, ou seja, o número máximo de iterações e / ou a precisão desejada.
+# "10" Sinalizador para especificar o número de vezes que o algoritmo é executado usando diferentes rotulagens iniciais. O algoritmo retorna os rótulos que produzem a melhor compactação
+# "cv2.KMEANS_RANDOM_CENTERS" Definir sinalizadores (apenas para evitar quebra de linha no código)
+#-----
+# "retval" É a soma da distância ao quadrado de cada ponto até seus centros correspondentes.
+# "labels" Esta é a matriz de rótulos (igual a 'código' no artigo anterior) onde cada elemento marcado como '0', '1' .....
+# "centers"  Esta é a matriz de centros de clusters.
+centers = np.uint8(centers) #converte o valor para inteiro sem sinal de 8 bits ( 0 para 255).
 segmented_data = centers[labels.flatten()]
 segmented_image = segmented_data.reshape((b.shape))
 pixel_labels = labels.reshape(img_lab.shape[0], img_lab.shape[1])
