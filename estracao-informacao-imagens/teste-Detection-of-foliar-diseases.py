@@ -1,0 +1,53 @@
+import cv2
+import numpy as np
+#-------------Imagens de Teste-------------------------------------
+#img = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
+#img = cv2.imread('img/16/06b4eeba-8283-46a8-9582-4fc8fecec4c6.jpg')
+#img = cv2.imread('img/37/2bbc7e78-bdea-42c9-aca7-3f37610c95d9.jpg')
+#img = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
+#img = cv2.imread('img/entrada/sigatoka.jpg')
+#img = cv2.imread('img/entrada/sigatoka1.jpeg')
+#img = cv2.imread('img/entrada/sigatoka3.jpeg')
+img = cv2.imread('img/entrada/tomate1.jpg')
+
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img_hsv = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2HSV)
+
+H = img_hsv[:, :, 0]
+S = img_hsv[:, :, 1]
+
+'''img_hsv_gaussian = cv2.GaussianBlur (S, (5,5), 0)
+ret3, th3 = cv2.threshold (img_hsv_gaussian, 0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)'''
+
+img = S
+blur = cv2.GaussianBlur(img,(5,5),0)
+# find normalized_histogram, and its cumulative distribution function
+hist = cv2.calcHist([blur],[0],None,[256],[0,256])
+hist_norm = hist.ravel()/hist.sum()
+Q = hist_norm.cumsum()
+bins = np.arange(256)
+fn_min = np.inf
+thresh = -1
+for i in range(0,23):#1,256 valor original
+    p1,p2 = np.hsplit(hist_norm,[i]) # probabilities
+    q1,q2 = Q[i],Q[255]-Q[i] # cum sum of classes
+    if q1 < 1.e-6 or q2 < 1.e-6:
+        continue
+    b1,b2 = np.hsplit(bins,[i]) # weights
+    # finding means and variances
+    m1,m2 = np.sum(p1*b1)/q1, np.sum(p2*b2)/q2
+    v1,v2 = np.sum(((b1-m1)**2)*p1)/q1,np.sum(((b2-m2)**2)*p2)/q2
+    # calculates the minimization function
+    fn = v1*q1 + v2*q2
+    if fn < fn_min:
+        fn_min = fn
+        thresh = i
+# find otsu's threshold value with OpenCV function
+ret, otsu = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+print( "{} {}".format(thresh,ret) )
+
+cv2.imshow("H", H)
+cv2.imshow("S", S)
+cv2.imshow("img_hsv", img_hsv)
+cv2.imshow("resultado", otsu)
+cv2.waitKey(0)
