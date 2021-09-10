@@ -9,6 +9,7 @@ import numpy as np
 #img = cv2.imread('img/entrada/sigatoka1.jpeg')
 #img = cv2.imread('img/entrada/sigatoka3.jpeg')
 img = cv2.imread('img/entrada/tomate1.jpg')
+img1 = img
 
 #-------------Convertendo Imagem e estraindo canais de cores-------------------------------------
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -19,10 +20,11 @@ S = img_hsv[:, :, 1]
 G = img_rgb[:, :, 1]
 
 #-------------Aplicando metodo de binarização-------------------------------------
-'''img_hsv_gaussian = cv2.GaussianBlur (S, (5,5), 0)
-ret3, th3 = cv2.threshold (img_hsv_gaussian, 0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)'''
+'''img_hsv_gaussian = cv2.GaussianBlur (G, (5,5), 0)
+ret3, otsu = cv2.threshold (img_hsv_gaussian, 0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+aplic_G = True'''
 
-img = H
+img = S
 blur = cv2.GaussianBlur(img,(5,5),0)
 # find normalized_histogram, and its cumulative distribution function
 hist = cv2.calcHist([blur],[0],None,[256],[0,256])
@@ -48,13 +50,25 @@ for i in range(0,23):#1,256 valor original
 # find otsu's threshold value with OpenCV function
 ret, otsu = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 print( "{} {}".format(thresh,ret) )
+aplic_G = False
 
 #-------------Aplicando operações morfológicas-------------------------------------
+if aplic_G == True:
+    otsu = cv2.bitwise_not(otsu)
+
 kernel = np.ones((5,5),np.uint8)
 dilation = cv2.dilate(otsu,kernel,iterations = 8)
 erosion = cv2.erode(dilation,kernel,iterations = 8)
 #fechamento = cv2.morphologyEx (otsu, cv2.MORPH_CLOSE, kernel)
 #gradiente = cv2.morphologyEx (otsu, cv2.MORPH_GRADIENT, kernel)
+
+#-------------Aplicando mascara-------------------------------------
+image = img1
+mask = np.zeros(image.shape[:2], dtype="uint8")
+cv2.rectangle(mask, (0, 90), (290, 450), 255, -1) #"mask"= endica em qual imagem sera aplicado, (0, 90), (290, 450), 255, 5)
+masked = cv2.bitwise_and(image, image, mask=erosion) #"image", image, mask=mask
+
+
 
 #-------------Mostrando na tela-------------------------------------
 cv2.imshow("H", H)
@@ -64,6 +78,7 @@ cv2.imshow("img_hsv", img_hsv)
 cv2.imshow("otsu-banarização", otsu)
 cv2.imshow("dilatação", dilation)
 cv2.imshow("erosão", erosion)
+cv2.imshow("Resultado", masked)
 #cv2.imshow("fechamento", fechamento)
 #cv2.imshow("gradiente", gradiente)
 cv2.waitKey(0)

@@ -13,3 +13,5 @@ https://docs.opencv.org/4.5.2/df/d9d/tutorial_py_colorspaces.html
 entrar em contato com autor vante pasta processamento de images
 leaf desease image segmentation
 leaf disease image segmentation
+
+https://docs.opencv.org/4.5.1/d3/dbe/tutorial_opening_closing_hats.html
