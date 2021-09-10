@@ -20,9 +20,9 @@ S = img_hsv[:, :, 1]
 G = img_rgb[:, :, 1]
 
 #-------------Aplicando metodo de binarização-------------------------------------
-'''img_hsv_gaussian = cv2.GaussianBlur (G, (5,5), 0)
-ret3, otsu = cv2.threshold (img_hsv_gaussian, 0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-aplic_G = True'''
+img_hsv_gaussian = cv2.GaussianBlur (G, (5,5), 0)
+ret3, otsu1 = cv2.threshold (img_hsv_gaussian, 0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+aplic_G = True
 
 img = S
 blur = cv2.GaussianBlur(img,(5,5),0)
@@ -50,14 +50,19 @@ for i in range(0,23):#1,256 valor original
 # find otsu's threshold value with OpenCV function
 ret, otsu = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 print( "{} {}".format(thresh,ret) )
-aplic_G = False
+#aplic_G = False
 
 #-------------Aplicando operações morfológicas-------------------------------------
 if aplic_G == True:
-    otsu = cv2.bitwise_not(otsu)
+    otsu1 = cv2.bitwise_not(otsu1)
+
+con = cv2.bitwise_or(otsu1,otsu)
+'''cv2.imshow("otsu1", otsu1)
+cv2.imshow("otsu", otsu)
+cv2.imshow("Juncao canal G e S", con)'''
 
 kernel = np.ones((5,5),np.uint8)
-dilation = cv2.dilate(otsu,kernel,iterations = 8)
+dilation = cv2.dilate(con,kernel,iterations = 7)
 erosion = cv2.erode(dilation,kernel,iterations = 8)
 #fechamento = cv2.morphologyEx (otsu, cv2.MORPH_CLOSE, kernel)
 #gradiente = cv2.morphologyEx (otsu, cv2.MORPH_GRADIENT, kernel)
