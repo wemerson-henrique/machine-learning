@@ -30,7 +30,18 @@ plt.xticks(rotation='vertical')
 
 
 #------------------------- fazer a leitura de uma imagem e dividila nos tres cainais de cor "LAB"
-image = cv2.imread('img/entrada/plantacao-de-bananeira-png-3.jpg') #faz a leitura de uma imagem
+#-------------Imagens de Teste-------------------------------------
+#image = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
+#image = cv2.imread('img/16/06b4eeba-8283-46a8-9582-4fc8fecec4c6.jpg')
+#image = cv2.imread('img/37/2bbc7e78-bdea-42c9-aca7-3f37610c95d9.jpg')
+image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
+#image = cv2.imread('img/entrada/sigatoka.jpg')
+#image = cv2.imread('img/entrada/sigatoka1.jpeg')
+#image = cv2.imread('img/entrada/sigatoka3.jpeg')
+#image = cv2.imread('img/entrada/tomate1.jpg')
+#image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+#image = cv2.imread("img/entrada/plantacao-de-bananeira-png-4.jpg")
+#image = cv2.imread('img/entrada/plantacao-de-bananeira-png-3.jpg') #faz a leitura de uma imagem
 
 img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB) #faz a converção da imagem do padão de cor BGR para LAB
 #OBS: o numpy trabalha com o canal RGB invertido de modo que fica BGR
