@@ -41,6 +41,7 @@ image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
 #image = cv2.imread('img/entrada/tomate1.jpg')
 #image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
 #image = cv2.imread("img/entrada/plantacao-de-bananeira-png-4.jpg")
+#image = cv2.imread('img/entrada/folha2.jpg')
 #image = cv2.imread('img/entrada/plantacao-de-bananeira-png-3.jpg') #faz a leitura de uma imagem
 
 img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB) #faz a converção da imagem do padão de cor BGR para LAB
@@ -136,5 +137,5 @@ final_crop_img = final_img[y:y+h-1, x:x+w-1, :]
 final_crop_img = np.uint8(final_crop_img)
 img = cv2.resize(final_crop_img, (640,480), interpolation=cv2.INTER_AREA)
 plt.imshow(img)
-
+cv2.imwrite("img/saida/imagem-sem-fundo.jpg", final_crop_img)
 plt.show()
