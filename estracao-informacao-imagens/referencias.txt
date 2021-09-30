@@ -15,3 +15,5 @@ leaf desease image segmentation
 leaf disease image segmentation
 
 https://docs.opencv.org/4.5.1/d3/dbe/tutorial_opening_closing_hats.html
+
+https://www.thepythoncode.com/article/kmeans-for-image-segmentation-opencv-python
