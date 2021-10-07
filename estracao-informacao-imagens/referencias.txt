@@ -17,3 +17,11 @@ leaf disease image segmentation
 https://docs.opencv.org/4.5.1/d3/dbe/tutorial_opening_closing_hats.html
 
 https://www.thepythoncode.com/article/kmeans-for-image-segmentation-opencv-python
+
+https://docs.opencv.org/master/d6/d10/tutorial_py_houghlines.html
+
+https://cadernodelaboratorio.com.br/detectar-linhas-com-o-opencv/
+
+https://cadernodelaboratorio.com.br/detectar-circulos-com-o-opencv-4-2/
+
+https://docs.opencv.org/4.5.1/da/d53/tutorial_py_houghcircles.html
