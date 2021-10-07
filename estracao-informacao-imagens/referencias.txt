@@ -25,3 +25,5 @@ https://cadernodelaboratorio.com.br/detectar-linhas-com-o-opencv/
 https://cadernodelaboratorio.com.br/detectar-circulos-com-o-opencv-4-2/
 
 https://docs.opencv.org/4.5.1/da/d53/tutorial_py_houghcircles.html
+
+https://www.pyimagesearch.com/2021/01/19/opencv-bitwise-and-or-xor-and-not/
