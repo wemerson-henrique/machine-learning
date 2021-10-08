@@ -15,7 +15,7 @@ class Detecta_Doenca:
         cv2.waitKey(0)
 
     def Segmentar(self):
-        img = self.imagem_YCrCb
+        img = self.imagem_rgb
         Z = img.reshape((-1, 3))
         Z = np.float32(Z)
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
