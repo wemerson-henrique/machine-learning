@@ -108,9 +108,9 @@ class Porcentagem:
         print("A pocentagem ocupada da imagem é: ", porcentagemDePixelsAtivos)
 
 #--------------------------
-'''imagem1 = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+imagem1 = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
 
 img1 = Detecta_Doenca(imagem1)
 img1.Convercao_Cores()
 img1.Segmentar()
-img1.Aplicando_Mascara()'''
+img1.Aplicando_Mascara()
