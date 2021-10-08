@@ -38,21 +38,22 @@ class Detecta_Doenca:
         #print(cluster)
 
     def Aplicando_Mascara(self):
-        gray = cv2.cvtColor(self.res2_YCrCb, cv2.COLOR_BGR2GRAY)
+        AplicandoMascaraNaImagem(self.res2_YCrCb,self.imagem)
 
+class AplicandoMascaraNaImagem:
+    def __init__(self,imagemBinarisada,ImagemOrigem):
+        gray = cv2.cvtColor(imagemBinarisada, cv2.COLOR_BGR2GRAY)
         img_hsv_gaussian = cv2.GaussianBlur(gray, (5, 5), 0)
         ret3, otsu1 = cv2.threshold(img_hsv_gaussian, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         cv2.imshow("binarização", otsu1)
-        image = self.imagem
+        image = ImagemOrigem
         mask = np.zeros(image.shape[:2], dtype="uint8")
         cv2.rectangle(mask, (0, 90), (290, 450), 255, -1)  # "mask"= endica em qual imagem sera aplicado, (0, 90), (290, 450), 255, 5)
         masked = cv2.bitwise_and(image, image, mask=otsu1)  # "image", image, mask=mask
-        cv2.imshow("Imagem Original", self.imagem)
-        cv2.imshow("masked", masked)
+        cv2.imshow("Imagem Original", ImagemOrigem)
+        cv2.imshow("Imagem Mascarada", masked)
         cv2.waitKey(0)
         Porcentagem(masked)
-        print("----------------------------------------------------------------------------")
-        Porcentagem1(masked)
 
 class Contorno:
     def __init__(self,imagem):
@@ -85,40 +86,31 @@ class Linha:
 
 class Porcentagem:
     def __init__(self,imagem):
-        print("Numero de bit preto = ",len(cv2.bitwise_and(imagem, (0,0,0))))
-        print("Numero de doença = ", len(cv2.bitwise_not(imagem, (0, 0, 0))))
-        altura, largura, canal = imagem.shape
-        tamanho = altura * largura
-        print("Tamanho total da imagem: ", tamanho," altura: ",altura," largura: ", largura," canal: ", canal )
-
-class Porcentagem1:
-    def __init__(self,imagem):
-        img1 = imagem
-        cont = 0
-        ver = 0
+        pixelsAtivos = 0
+        pixelsInativos = 0
 
         # os for iram percorre a igagem identificando cada pixel
-        for y in range(0, img1.shape[0]):
-            for x in range(0, img1.shape[1]):
-                (b, g, r) = img1[y, x]
+        for y in range(0, imagem.shape[0]):
+            for x in range(0, imagem.shape[1]):
+                (b, g, r) = imagem[y, x]
                 if b != 0 and g != 0 and r != 0:
-                    cont = cont + 1
+                    pixelsAtivos = pixelsAtivos + 1
                 else:
-                    img1[y, x] = (255, 0, 0)
-                    ver = ver + 1
+                    pixelsInativos = pixelsInativos + 1
 
-        altura, largura, canal = img1.shape
-        tamanho = altura * largura
-        print("Tamanho total da imagem: ", tamanho)
-        print("Numero de pix azuis: ", ver)
-        print("Numero de pix brancos: ", cont)
-        pv = (cont / tamanho) * 100
-        print("A pocentagem ocupada da imagem é: ", pv)
+        alturaDaImagem, larguraDaImagem, canaisDeCoresDaImagem = imagem.shape
+        tamanhoDaImagem = alturaDaImagem * larguraDaImagem
+        print("Tamanho total da imagem em pixels: ", tamanhoDaImagem,
+              " altura: ", alturaDaImagem, " largura: ", larguraDaImagem, " canal: ", canaisDeCoresDaImagem)
+        print("Numero de pixels brancos/ativos: ", pixelsAtivos)
+        print("Numero de pixels pretos/inativos: ", pixelsInativos)
+        porcentagemDePixelsAtivos = (pixelsAtivos / tamanhoDaImagem) * 100
+        print("A pocentagem ocupada da imagem é: ", porcentagemDePixelsAtivos)
 
 #--------------------------
-imagem1 = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+'''imagem1 = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
 
 img1 = Detecta_Doenca(imagem1)
 img1.Convercao_Cores()
 img1.Segmentar()
-img1.Aplicando_Mascara()
+img1.Aplicando_Mascara()'''
