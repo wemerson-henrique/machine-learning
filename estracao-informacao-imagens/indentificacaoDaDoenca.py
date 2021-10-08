@@ -13,11 +13,11 @@ class aplicandoKmeansNaImagem:
     def __init__(self, imagem):
         Z = np.float32(imagem.reshape((-1, 3)))
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-        k = 5
+        k = 10
         ret, label, center = cv2.kmeans(Z, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
         center = np.uint8(center)
         res = center[label.flatten()]
-        self.res2 = res.reshape((img.shape))
+        self.res2 = res.reshape((imagem.shape))
 
 class converteImagemParaTonsDeCinza:
     def __init__(self,imagem):
@@ -49,9 +49,6 @@ class aplicandoFuncao: #Função não esta fucionando é preciso verificar
         self.imagemResposta = aplicaMacara(imagem,imagemBinarizada)
 
 img1 = cv2.imread("img/entrada/folha-de-mamao-menor.jpg")
-cv2.imshow("img1",img1)
-a = aplicaBinarizacaoDaImagemMetodoOtsu(img1).imagemOtsu
-cv2.imshow("a",a)
-b = aplicaMacara(img1,a).imagemComMascara
-cv2.imshow("b", b)
+a = aplicandoKmeansNaImagem(img1).res2
+cv2.imshow("img1",a)
 cv2.waitKey(0)
