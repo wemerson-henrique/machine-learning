@@ -48,7 +48,19 @@ class aplicandoFuncao: #Função não esta fucionando é preciso verificar
         print("OK")
         self.imagemResposta = aplicaMacara(imagem,imagemBinarizada)
 
-img1 = cv2.imread("img/entrada/folha-de-mamao-menor.jpg")
-a = aplicandoKmeansNaImagem(img1).res2
+'''img1 = cv2.imread("img/entrada/folha-de-mamao-menor.jpg")
+img2 = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+
+#a = converteImagemParaTonsDeCinza(img2).imagemEmCinza
+a = converteImagemParaRGB(img2).imagemRGB
+a = aplicandoKmeansNaImagem(a).res2
+a = converteImagemParaTonsDeCinza(a).imagemEmCinza
+
+b = converteImagemParaYCrCb(img2).imagemYCrCb
+b = aplicandoKmeansNaImagem(b).res2
+b = converteImagemParaTonsDeCinza(b).imagemEmCinza
+
 cv2.imshow("img1",a)
-cv2.waitKey(0)
+cv2.imshow("img2",b)
+#cv2.imshow("img3",c)
+cv2.waitKey(0)'''
