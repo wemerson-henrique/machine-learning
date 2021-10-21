@@ -10,7 +10,7 @@ class trabalhandoAsImagens:
         arquivos = arquivos + sorted(glob(str(pasta)+'/*.jpeg'))
         return arquivos
 
-    def redimencionaImagens(self, arquivos, novaLargura):
+    def redimencionaImagens(self, arquivos, novaLargura=620):
         for i in range(len(arquivos)):
             imagem = cv2.imread(arquivos[i])
             alturaImagem, larguraImagem = imagem.shape[0], imagem.shape[1]
@@ -23,6 +23,7 @@ class trabalhandoAsImagens:
         return arquivos
 
     def salvaImagens(self, arquivos, caminho):
+        caminho = str(caminho)
         for i in range(len(arquivos)):
             cv2.imwrite(str(caminho)+"/imagem" + str(i)+".jpg", arquivos[i])
 
