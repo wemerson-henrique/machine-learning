@@ -29,3 +29,5 @@ https://docs.opencv.org/4.5.1/da/d53/tutorial_py_houghcircles.html
 https://www.pyimagesearch.com/2021/01/19/opencv-bitwise-and-or-xor-and-not/
 
 https://www.youtube.com/watch?v=O3s8-Rnerr4&t=244s
+
+https://felipemeganha.medium.com/comparando-histogramas-das-imagens-com-python-e-opencv-bbe71b8e0ff
