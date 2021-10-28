@@ -2,22 +2,17 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-'''img2 = cv2.imread("img/imagensDeTesteEntra/banana/folha4.JPG")
+caminho = "img/37/83458ab6-353f-4bd5-8853-03cd163e177e.jpg"
 
-canalDecores = [0]
-tamanho = [256]
-ranges = [0,255]
-
-histograma = cv2.calcHist([img2],canalDecores,None,tamanho,ranges)
-
+img2 = cv2.imread(str(caminho))
+img = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+hist = cv2.calcHist([img], [0], None, [256], [0, 256])
 plt.hist(img2.ravel(),256,[0,256])
-
-cv2.imshow("img2",img2)
+cv2.imshow("Img",img)
 plt.show()
-cv2.waitKey(0)
-'''
 
-img2 = cv2.imread("img/imagensDeTestePreparadasParaSigmentacao/banana/imagem6.JPG",cv2.IMREAD_COLOR)
+
+img2 = cv2.imread(str(caminho),cv2.IMREAD_COLOR)
 color = ('b','g','r')
 for i,col in enumerate(color):
     histr = cv2.calcHist([img2],[i],None,[256],[0,256])

@@ -31,9 +31,9 @@ plt.xticks(rotation='vertical')
 
 #------------------------- fazer a leitura de uma imagem e dividila nos tres cainais de cor "LAB"
 #-------------Imagens de Teste-------------------------------------
-image = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
+#image = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
 #image = cv2.imread('img/16/06b4eeba-8283-46a8-9582-4fc8fecec4c6.jpg')
-#image = cv2.imread('img/37/2bbc7e78-bdea-42c9-aca7-3f37610c95d9.jpg')
+image = cv2.imread('img/37/2bbc7e78-bdea-42c9-aca7-3f37610c95d9.jpg')
 #image = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
 #image = cv2.imread('img/entrada/sigatoka.jpg')
 #image = cv2.imread('img/entrada/sigatoka1.jpeg')
