@@ -44,20 +44,20 @@ class removeFundo:
         return final_img
 
 b = sisIF.trabalhandoAsImagens()
-imagensEntrada = b.lendoImagensDaPasta("img/imagensDeTestePreparadasParaSigmentacao/mamao")
+imagensEntrada = b.lendoImagensDaPasta("img/imagensDeTestePreparadasParaSigmentacao/banana")
 print(str(imagensEntrada))
 
 for i in range(len(imagensEntrada)):
     image = cv2.imread(imagensEntrada[i])
 
-img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+    img_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
 
-removendoFundo = removeFundo()
+    removendoFundo = removeFundo()
 
-L, a, b = removendoFundo.divideImagenEmCanaisDeCor(img_lab)
-imagemSemFundo = removendoFundo.retiraFundo(b)
-plt.imshow(imagemSemFundo)
-cv2.imwrite("img/Imagem-exemplo.jpg",imagemSemFundo)
+    L, a, b = removendoFundo.divideImagenEmCanaisDeCor(img_lab)
+    imagemSemFundo = removendoFundo.retiraFundo(b)
+    #plt.imshow(imagemSemFundo)
+    cv2.imwrite("img/imagensDeTesteSaida/banana-brg/imagem"+str(i)+".jpg",imagemSemFundo)
 
 cv2.waitKey(0)
 plt.show()

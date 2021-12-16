@@ -4,7 +4,15 @@ import matplotlib.pyplot as plt
 
 
 
-original_image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+#original_image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+'''original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem1.jpg")
+original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem2.jpg")
+original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem4.jpg")
+original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem22.jpg")
+original_image = cv2.imread("img/entrada/sigatoka.jpg")#k=4, 200 valor para doença em claro
+original_image = cv2.imread("img/entrada/sigatoka5.jpg")#k=8, 160 valor para doença em escuro
+original_image = cv2.imread("img/entrada/sigatoka6.jpg")#k=8, 132 valor para doença  em escuro'''
+original_image = cv2.imread("img/entrada/sigatoka7.1.jpg")#k=13, acima de 160 para claro e abaixo de 80 para escuro/// resulado mais enteressante
 
 '''#-----------------------Imagem YCrCb -------------------------------------
 image_YCrCb = cv2.cvtColor(original_image, cv2.COLOR_YCrCb2BGR)
@@ -92,7 +100,7 @@ cv2.imshow("masked com THRESH_BINARY",masked1)
 imagem = original_image
 Z = np.float32(imagem.reshape((-1, 3)))
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-k = 4
+k = 13
 ret, label, center = cv2.kmeans(Z, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 center = np.uint8(center)
 res = center[label.flatten()]
@@ -112,7 +120,7 @@ plt.plot(h)
 plt.xlim([0, 256])
 plt.show()
 
-ret3, otsu1BRG = cv2.threshold (grayBRG, 80,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY)
+ret3, otsu1BRG = cv2.threshold (grayBRG, 160,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY)
 cv2.imshow("binarizacao doente",otsu1BRG)
 image = original_image
 mask = np.zeros(image.shape[:2], dtype="uint8")
