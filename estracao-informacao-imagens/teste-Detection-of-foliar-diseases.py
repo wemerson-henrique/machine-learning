@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
 #-------------Imagens de Teste-------------------------------------
-#img = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
+img = cv2.imread('img/16/40e9d306-b56d-4066-b081-895eb2cfed1f.jpg')
 #img = cv2.imread('img/16/06b4eeba-8283-46a8-9582-4fc8fecec4c6.jpg')
 #img = cv2.imread('img/37/2bbc7e78-bdea-42c9-aca7-3f37610c95d9.jpg')
 #img = cv2.imread('img/entrada/folha-de-mamao-menor.jpg')
-img = cv2.imread('img/entrada/sigatoka.jpg')
+#img = cv2.imread('img/entrada/sigatoka.jpg')
 #img = cv2.imread('img/entrada/sigatoka1.jpeg')
 #img = cv2.imread('img/entrada/sigatoka3.jpeg')
 #img = cv2.imread('img/entrada/tomate1.jpg')

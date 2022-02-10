@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-caminho = "img/37/83458ab6-353f-4bd5-8853-03cd163e177e.jpg"
+caminho = "img/entrada/folha-de-mamao-sem-fundo.jpg"
 
 img2 = cv2.imread(str(caminho))
 img = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)

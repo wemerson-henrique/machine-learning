@@ -4,15 +4,16 @@ import matplotlib.pyplot as plt
 
 
 
-#original_image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
-'''original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem1.jpg")
-original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem2.jpg")
-original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem4.jpg")
-original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem22.jpg")
-original_image = cv2.imread("img/entrada/sigatoka.jpg")#k=4, 200 valor para doença em claro
-original_image = cv2.imread("img/entrada/sigatoka5.jpg")#k=8, 160 valor para doença em escuro
-original_image = cv2.imread("img/entrada/sigatoka6.jpg")#k=8, 132 valor para doença  em escuro'''
-original_image = cv2.imread("img/entrada/sigatoka7.1.jpg")#k=13, acima de 160 para claro e abaixo de 80 para escuro/// resulado mais enteressante
+original_image = cv2.imread("img/entrada/folha-de-mamao-sem-fundo.jpg")
+#original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem1.jpg")
+#original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem2.jpg")
+#original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem4.jpg")
+#original_image = cv2.imread("img/imagensDeTesteSaida/banana-brg/imagem22.jpg")
+#original_image = cv2.imread("img/entrada/sigatoka.jpg")#k=4, 200 valor para doença em claro
+#original_image = cv2.imread("img/entrada/sigatoka4.jpg")#k=8, 160 valor para doença em escuro
+#original_image = cv2.imread("img/entrada/sigatoka5.jpg")#k=8, 160 valor para doença em escuro
+#original_image = cv2.imread("img/entrada/sigatoka6.jpg")#k=8, 132 valor para doença  em escuro
+#original_image = cv2.imread("img/entrada/sigatoka7.1.jpg")#k=13, acima de 160 para claro e abaixo de 80 para escuro/// resulado mais enteressante
 
 '''#-----------------------Imagem YCrCb -------------------------------------
 image_YCrCb = cv2.cvtColor(original_image, cv2.COLOR_YCrCb2BGR)
@@ -120,7 +121,7 @@ plt.plot(h)
 plt.xlim([0, 256])
 plt.show()
 
-ret3, otsu1BRG = cv2.threshold (grayBRG, 160,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY)
+ret3, otsu1BRG = cv2.threshold (grayBRG, 90,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY)
 cv2.imshow("binarizacao doente",otsu1BRG)
 image = original_image
 mask = np.zeros(image.shape[:2], dtype="uint8")
@@ -128,7 +129,7 @@ cv2.rectangle(mask, (0, 90), (290, 450), 255, -1)
 maskedBRG = cv2.bitwise_and(image, image, mask=otsu1BRG)
 cv2.imshow("masked brg doente",maskedBRG)
 
-ret3, otsu2BRG = cv2.threshold (grayBRG, 80,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY_INV)
+ret3, otsu2BRG = cv2.threshold (grayBRG, 90,255, cv2.THRESH_BINARY + cv2.THRESH_BINARY_INV)
 cv2.imshow("binarizacao saldavel",otsu2BRG)
 image = original_image
 mask = np.zeros(image.shape[:2], dtype="uint8")

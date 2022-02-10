@@ -23,7 +23,7 @@ cv2.waitKey(0)'''
 
 #-----------------------------------------------------8.1 Threshold adaptativo-------------------------------------------------------
 
-'''import numpy as np
+import numpy as np
 import cv2
 
 img = cv2.imread('img/entrada/sigatoka.jpg')
@@ -39,7 +39,7 @@ np.hstack([img, suave]),
 np.hstack([bin1, bin2])
 ])
 cv2.imshow("Binarização adaptativa da imagem", resultado)
-cv2.waitKey(0)'''
+cv2.waitKey(0)
 
 #-----------------------------------------------------8.2 Threshold com Otsu e Riddler-Calvard-------------------------------------------------------
 

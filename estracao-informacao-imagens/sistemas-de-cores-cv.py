@@ -7,8 +7,8 @@ como ficaria nossa imagem da ponte nos outros espaços de cores.
 '''
 
 import cv2
-#img = cv2.imread('img/entrada/sigatoka.jpg')
-img = cv2.imread('img/entrada/sigatoka3.jpeg')
+img = cv2.imread('img/entrada/sigatoka.jpg')
+#img = cv2.imread('img/entrada/sigatoka3.jpeg')
 
 cv2.imshow("Original", img)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
